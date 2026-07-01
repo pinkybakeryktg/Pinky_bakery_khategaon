@@ -29,7 +29,6 @@
       <ul class="nav-links" id="navLinks" role="list">
         <li><a href="#home" class="nav-link active">Home</a></li>
         <li><a href="#menu" class="nav-link">Menu</a></li>
-        <li><a href="#gallery" class="nav-link">Gallery</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
@@ -176,271 +175,130 @@
         <h2 class="section-title">The <em>Menu</em></h2>
         <p class="section-desc">From indulgent cakes to savoury snacks — there's something for every craving.</p>
       </div>
+<!-- Category Tabs -->
+<div class="menu-tabs reveal-up" role="tablist" aria-label="Menu categories">
+    <button class="tab-btn active" data-cat="all">All</button>
+    <button class="tab-btn" data-cat="pizza">🍕 Pizza</button>
+    <button class="tab-btn" data-cat="sandwich">🥪 Sandwiches</button>
+    <button class="tab-btn" data-cat="burger">🍔 Burgers</button>
+    <button class="tab-btn" data-cat="drinks">🥤 Shakes & Coffee</button>
+    <button class="tab-btn" data-cat="snacks">🍟 Snacks</button>
+    <button class="tab-btn" data-cat="maggi">🍜 Maggi</button>
+</div>
 
-      <!-- Category Tabs -->
-      <div class="menu-tabs reveal-up" role="tablist" aria-label="Menu categories">
-        <button class="tab-btn active" data-cat="all" role="tab" aria-selected="true">All</button>
-        <button class="tab-btn" data-cat="cakes" role="tab" aria-selected="false">Cakes</button>
-        <button class="tab-btn" data-cat="pastries" role="tab" aria-selected="false">Pastries</button>
-        <button class="tab-btn" data-cat="cookies" role="tab" aria-selected="false">Cookies</button>
-        <button class="tab-btn" data-cat="savory" role="tab" aria-selected="false">Savoury</button>
-        <button class="tab-btn" data-cat="drinks" role="tab" aria-selected="false">Drinks</button>
-      </div>
+<div class="menu-grid" id="menuGrid">
 
-      <div class="menu-grid" id="menuGrid" role="tabpanel">
+    <!-- Pizza -->
+    <div class="menu-card" data-cat="pizza">
+        <div class="card-body">
+            <h2>🍕 Pizza</h2>
 
-        <!-- CAKES -->
-        <div class="menu-card reveal-up" data-cat="cakes" style="--delay:0.05s">
-          <div class="card-img-wrap">
-            <div class="card-img cake-bg1"></div>
-            <span class="ribbon">Best Seller</span>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Cakes</span>
-            <h3>Strawberry Dream Cake</h3>
-            <p>Layers of moist sponge, fresh strawberry cream & a rose glaze.</p>
-            <div class="card-footer">
-              <span class="price">₹ 450</span>
-            </div>
-          </div>
+            <div class="menu-item"><span>Jain Pizza</span><span>₹120</span></div>
+            <div class="menu-item"><span>Corn Pizza</span><span>₹120</span></div>
+            <div class="menu-item"><span>Onion Capsicum Pizza</span><span>₹120</span></div>
+            <div class="menu-item"><span>Vegetable Pizza</span><span>₹130</span></div>
+            <div class="menu-item"><span>Corn Onion Pizza</span><span>₹130</span></div>
+            <div class="menu-item"><span>Margherita Pizza</span><span>₹130</span></div>
+            <div class="menu-item"><span>Double Cheese Pizza</span><span>₹150</span></div>
+            <div class="menu-item"><span>Capsicum Paneer Tikka Pizza</span><span>₹150</span></div>
+            <div class="menu-item"><span>Onion Paneer Tikka Pizza</span><span>₹150</span></div>
+            <div class="menu-item"><span>Corn Paneer Pizza</span><span>₹150</span></div>
+            <div class="menu-item"><span>Full Loaded Paneer Pizza</span><span>₹160</span></div>
+            <div class="menu-item"><span>Paneer Tikka Pizza</span><span>₹170</span></div>
+            <div class="menu-item"><span>Pinky Bakery Special Pizza</span><span>₹170</span></div>
+            <div class="menu-item"><span>Pasta Pizza</span><span>₹180</span></div>
+            <div class="menu-item"><span>Farmhouse Pizza</span><span>₹180</span></div>
+            <div class="menu-item"><span>Cheese Burst Pizza</span><span>₹200</span></div>
         </div>
-
-        <div class="menu-card reveal-up" data-cat="cakes" style="--delay:0.1s">
-          <div class="card-img-wrap">
-            <div class="card-img cake-bg2"></div>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Cakes</span>
-            <h3>Dark Chocolate Truffle</h3>
-            <p>Rich, decadent chocolate truffle cake with ganache drizzle.</p>
-            <div class="card-footer">
-              <span class="price">₹ 520</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card reveal-up" data-cat="cakes" style="--delay:0.15s">
-          <div class="card-img-wrap">
-            <div class="card-img cake-bg3"></div>
-            <span class="ribbon">Popular</span>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Cakes</span>
-            <h3>Vanilla Bliss Cake</h3>
-            <p>Classic vanilla sponge with whipped cream & golden sprinkles.</p>
-            <div class="card-footer">
-              <span class="price">₹ 380</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- PASTRIES -->
-        <div class="menu-card reveal-up" data-cat="pastries" style="--delay:0.05s">
-          <div class="card-img-wrap">
-            <div class="card-img pastry-bg1"></div>
-            <span class="ribbon">Best Seller</span>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Pastries</span>
-            <h3>Butter Croissant</h3>
-            <p>Flaky, golden croissants baked fresh every morning — simply perfect.</p>
-            <div class="card-footer">
-              <span class="price">₹ 60</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card reveal-up" data-cat="pastries" style="--delay:0.1s">
-          <div class="card-img-wrap">
-            <div class="card-img pastry-bg2"></div>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Pastries</span>
-            <h3>Cream Puff</h3>
-            <p>Choux pastry shells filled with silky vanilla custard cream.</p>
-            <div class="card-footer">
-              <span class="price">₹ 45</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card reveal-up" data-cat="pastries" style="--delay:0.15s">
-          <div class="card-img-wrap">
-            <div class="card-img pastry-bg3"></div>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Pastries</span>
-            <h3>Mango Danish</h3>
-            <p>Laminated pastry topped with sweet Alphonso mango custard.</p>
-            <div class="card-footer">
-              <span class="price">₹ 70</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- COOKIES -->
-        <div class="menu-card reveal-up" data-cat="cookies" style="--delay:0.05s">
-          <div class="card-img-wrap">
-            <div class="card-img cookie-bg1"></div>
-            <span class="ribbon">Best Seller</span>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Cookies</span>
-            <h3>Choco Chip Cookies</h3>
-            <p>Crispy edges, chewy centres, loaded with chocolate chips.</p>
-            <div class="card-footer">
-              <span class="price">₹ 30 / pc</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card reveal-up" data-cat="cookies" style="--delay:0.1s">
-          <div class="card-img-wrap">
-            <div class="card-img cookie-bg2"></div>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Cookies</span>
-            <h3>Butter Cookies</h3>
-            <p>Melt-in-mouth shortbread-style butter cookies, lightly salted.</p>
-            <div class="card-footer">
-              <span class="price">₹ 25 / pc</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- SAVORY -->
-        <div class="menu-card reveal-up" data-cat="savory" style="--delay:0.05s">
-          <div class="card-img-wrap">
-            <div class="card-img savory-bg1"></div>
-            <span class="ribbon">Hot Pick</span>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Savoury</span>
-            <h3>Veg Puff</h3>
-            <p>Crispy golden puff pastry filled with spiced potato & peas.</p>
-            <div class="card-footer">
-              <span class="price">₹ 20</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card reveal-up" data-cat="savory" style="--delay:0.1s">
-          <div class="card-img-wrap">
-            <div class="card-img savory-bg2"></div>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Savoury</span>
-            <h3>Pizza Slice</h3>
-            <p>Cheese-loaded pizza slices baked in a stone oven, ₹ served hot.</p>
-            <div class="card-footer">
-              <span class="price">₹ 80</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card reveal-up" data-cat="savory" style="--delay:0.15s">
-          <div class="card-img-wrap">
-            <div class="card-img savory-bg3"></div>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Savoury</span>
-            <h3>Club Sandwich</h3>
-            <p>Triple-decker toasted sandwich with fresh veggies & mayo.</p>
-            <div class="card-footer">
-              <span class="price">₹ 90</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- DRINKS -->
-        <div class="menu-card reveal-up" data-cat="drinks" style="--delay:0.05s">
-          <div class="card-img-wrap">
-            <div class="card-img drink-bg1"></div>
-            <span class="ribbon">Favourite</span>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Drinks</span>
-            <h3>Rose Milk</h3>
-            <p>Chilled rose-flavoured milk — sweet, floral & refreshingly cold.</p>
-            <div class="card-footer">
-              <span class="price">₹ 50</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card reveal-up" data-cat="drinks" style="--delay:0.1s">
-          <div class="card-img-wrap">
-            <div class="card-img drink-bg2"></div>
-          </div>
-          <div class="card-body">
-            <span class="card-badge">Drinks</span>
-            <h3>Cold Coffee</h3>
-            <p>Blended cold coffee with a creamy froth top — a classic pick-me-up.</p>
-            <div class="card-footer">
-              <span class="price">₹ 70</span>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /menu-grid -->
-    </div>
-  </section>
-
-  <!-- ===== GALLERY ===== -->
-  <section class="gallery-section section" id="gallery" aria-label="Photo gallery">
-    <div class="container">
-      <div class="section-header reveal-up">
-        <p class="section-eyebrow">A Feast for the Eyes</p>
-        <h2 class="section-title">Our <em>Gallery</em></h2>
-        <p class="section-desc">A glimpse inside the magic — click any image to explore.</p>
-      </div>
-
-      <div class="masonry-gallery reveal-up" id="gallery" role="list">
-        <div class="gallery-item" role="listitem" data-index="0" tabindex="0" aria-label="Gallery image 1">
-          <div class="gallery-img g-img-1"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-        <div class="gallery-item" role="listitem" data-index="1" tabindex="0" aria-label="Gallery image 2">
-          <div class="gallery-img g-img-2"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-        <div class="gallery-item" role="listitem" data-index="2" tabindex="0" aria-label="Gallery image 3">
-          <div class="gallery-img g-img-3"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-        <div class="gallery-item" role="listitem" data-index="3" tabindex="0" aria-label="Gallery image 4">
-          <div class="gallery-img g-img-4"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-        <div class="gallery-item" role="listitem" data-index="4" tabindex="0" aria-label="Gallery image 5">
-          <div class="gallery-img g-img-5"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-        <div class="gallery-item" role="listitem" data-index="5" tabindex="0" aria-label="Gallery image 6">
-          <div class="gallery-img g-img-6"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-        <div class="gallery-item" role="listitem" data-index="6" tabindex="0" aria-label="Gallery image 7">
-          <div class="gallery-img g-img-7"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-        <div class="gallery-item" role="listitem" data-index="7" tabindex="0" aria-label="Gallery image 8">
-          <div class="gallery-img g-img-8"></div>
-          <div class="gallery-overlay"><span>✦</span></div>
-        </div>
-      </div>
     </div>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox" hidden>
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">✕</button>
-      <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">‹</button>
-      <div class="lightbox-img-wrap">
-        <div class="lightbox-img" id="lightboxImg"></div>
-      </div>
-      <button class="lightbox-next" id="lightboxNext" aria-label="Next image">›</button>
+    <!-- Sandwich -->
+    <div class="menu-card" data-cat="sandwich">
+        <div class="card-body">
+            <h2>🥪 Sandwiches</h2>
+
+            <div class="menu-item"><span>Masala Sandwich</span><span>₹50</span></div>
+            <div class="menu-item"><span>Cheese Chutney Sandwich</span><span>₹50</span></div>
+            <div class="menu-item"><span>Vegetable Sandwich</span><span>₹50</span></div>
+            <div class="menu-item"><span>Veg Cheese Sandwich</span><span>₹50</span></div>
+            <div class="menu-item"><span>Veg Mayo Sandwich</span><span>₹50</span></div>
+            <div class="menu-item"><span>Paneer Sandwich</span><span>₹60</span></div>
+            <div class="menu-item"><span>Double Cheese Sandwich</span><span>₹60</span></div>
+            <div class="menu-item"><span>Corn Cheese Sandwich</span><span>₹70</span></div>
+            <div class="menu-item"><span>Pizza Sandwich</span><span>₹70</span></div>
+            <div class="menu-item"><span>Corn Paneer Sandwich</span><span>₹70</span></div>
+            <div class="menu-item"><span>Masala Tandoori Sandwich</span><span>₹70</span></div>
+            <div class="menu-item"><span>Achari Paneer Sandwich</span><span>₹80</span></div>
+            <div class="menu-item"><span>Masala Club Sandwich</span><span>₹80</span></div>
+        </div>
     </div>
-  </section>
+
+    <!-- Burger -->
+    <div class="menu-card" data-cat="burger">
+        <div class="card-body">
+            <h2>🍔 Burgers</h2>
+
+            <div class="menu-item"><span>Aloo Tikki Burger</span><span>₹50</span></div>
+            <div class="menu-item"><span>Aloo Tikki Cheese Burger</span><span>₹60</span></div>
+            <div class="menu-item"><span>Vegetable Burger</span><span>₹60</span></div>
+            <div class="menu-item"><span>Vegetable Cheese Burger</span><span>₹70</span></div>
+        </div>
+    </div>
+
+    <!-- Drinks -->
+    <div class="menu-card" data-cat="drinks">
+        <div class="card-body">
+            <h2>🥤 Coffee & Shakes</h2>
+
+            <div class="menu-item"><span>Cold Coffee</span><span>₹60</span></div>
+            <div class="menu-item"><span>Cold Coffee with Brownie</span><span>₹70</span></div>
+            <div class="menu-item"><span>Cold Coffee with Ice Cream</span><span>₹70</span></div>
+            <div class="menu-item"><span>Oreo Shake</span><span>₹70</span></div>
+            <div class="menu-item"><span>Oreo Shake with Brownie</span><span>₹80</span></div>
+            <div class="menu-item"><span>KitKat Shake</span><span>₹70</span></div>
+            <div class="menu-item"><span>KitKat Shake with Brownie</span><span>₹80</span></div>
+            <div class="menu-item"><span>Chocolate Shake</span><span>₹70</span></div>
+            <div class="menu-item"><span>Chocolate Shake with Brownie</span><span>₹80</span></div>
+        </div>
+    </div>
+
+    <!-- Snacks -->
+    <div class="menu-card" data-cat="snacks">
+        <div class="card-body">
+            <h2>🍟 Snacks</h2>
+
+            <div class="menu-item"><span>Bake Samosa</span><span>₹25</span></div>
+            <div class="menu-item"><span>Cheese Bake Samosa</span><span>₹40</span></div>
+            <div class="menu-item"><span>Double Cheese Bake Samosa</span><span>₹50</span></div>
+            <div class="menu-item"><span>Cheese Corn Samosa</span><span>₹50</span></div>
+            <div class="menu-item"><span>Vegetable Cheese Samosa</span><span>₹50</span></div>
+            <div class="menu-item"><span>Pizza Samosa</span><span>₹70</span></div>
+            <hr>
+            <div class="menu-item"><span>French Fries</span><span>₹50</span></div>
+            <div class="menu-item"><span>Masala Fries</span><span>₹70</span></div>
+            <div class="menu-item"><span>Cheese Fries</span><span>₹100</span></div>
+            <div class="menu-item"><span>Sizzling Fries</span><span>₹70</span></div>
+        </div>
+    </div>
+
+    <!-- Maggi -->
+    <div class="menu-card" data-cat="maggi">
+        <div class="card-body">
+            <h2>🍜 Maggi & Pav Bhaji</h2>
+
+            <div class="menu-item"><span>Pav Bhaji</span><span>₹70</span></div>
+            <div class="menu-item"><span>Extra Pav</span><span>₹10</span></div>
+            <hr>
+            <div class="menu-item"><span>Masala Maggi</span><span>₹50</span></div>
+            <div class="menu-item"><span>Vegetable Maggi</span><span>₹60</span></div>
+            <div class="menu-item"><span>Cheese Maggi</span><span>₹70</span></div>
+            <div class="menu-item"><span>Tandoori Cheese Maggi</span><span>₹80</span></div>
+        </div>
+    </div>
+
+</div>
+
+  
 
   <!-- ===== ABOUT ===== -->
   <section class="about section" id="about" aria-label="About Pinky Bakery">
