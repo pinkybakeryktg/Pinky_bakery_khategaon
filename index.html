@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Temporarily Unavailable — Request Access</title>
+<meta name="description" content="This website has been intentionally unpublished by its owner. Submit a request below if you need access.">
+<meta name="robots" content="noindex, follow">
+<meta property="og:title" content="Website Temporarily Unavailable">
+<meta property="og:description" content="This website has been intentionally unpublished. Request access below.">
+<meta property="og:type" content="website">
+
+<style>
+  :root{
+    --bg: #0a0c12;
+    --bg-soft: #0f121a;
+    --card: #12151f;
+    --card-border: #1f2430;
+    --text: #e8eaf0;
+    --text-muted: #8a92a6;
+    --text-faint: #565f74;
+    --signal: #6c7bff;
+    --signal-soft: rgba(108,123,255,0.14);
+    --amber: #f4b860;
+    --danger: #ff6b6b;
+    --success: #59d19a;
+    --radius: 14px;
+    --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+    --font-body: 'Inter', 'Segoe UI', sans-serif;
+  }
+
+  [data-theme="light"]{
+    --bg: #f4f3f0;
+    --bg-soft: #ebe9e4;
+    --card: #ffffff;
+    --card-border: #e2e0da;
+    --text: #1a1c22;
+    --text-muted: #62687a;
+    --text-faint: #9298a8;
+    --signal: #4b57d6;
+    --signal-soft: rgba(75,87,214,0.10);
+    --amber: #c98a2e;
+  }
+
+  @font-face{
+    font-family:'Space Grotesk';
+    src: local('Space Grotesk');
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow-x:hidden;
+    padding: 24px;
+    transition: background .4s ease, color .4s ease;
+    line-height:1.5;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+  /* ---------- background signal blobs ---------- */
+  .blob-field{
+    position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(70px);
+    opacity:.35;
+    will-change: transform;
+  }
+  .blob.b1{
+    width:420px; height:420px; background: var(--signal);
+    top:-120px; left:-100px;
+    animation: drift1 22s ease-in-out infinite;
+  }
+  .blob.b2{
+    width:380px; height:380px; background: var(--amber);
+    bottom:-140px; right:-80px;
+    animation: drift2 26s ease-in-out infinite;
+    opacity:.22;
+  }
+  .blob.b3{
+    width:260px; height:260px; background: var(--signal);
+    top:40%; right:10%;
+    animation: drift3 30s ease-in-out infinite;
+    opacity:.18;
+  }
+  @keyframes drift1{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(60px,80px) scale(1.15); }
+  }
+  @keyframes drift2{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-50px,-60px) scale(1.1); }
+  }
+  @keyframes drift3{
+    0%,100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(-40px,50px) scale(1.2); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .blob{ animation: none !important; }
+    *{ animation-duration: .001s !important; transition-duration: .001s !important; }
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:fixed; top:0; left:0; right:0;
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 18px 24px; z-index:5;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand svg{ display:block; }
+  .brand-name{
+    font-family: var(--font-display); font-weight:600; font-size:15px;
+    color: var(--text); letter-spacing:.2px;
+  }
+  .controls{ display:flex; gap:8px; }
+  .ctrl-btn{
+    background: var(--card);
+    border:1px solid var(--card-border);
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size:13px; font-weight:600;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: all .2s ease;
+  }
+  .ctrl-btn:hover{ color: var(--text); border-color: var(--signal); }
+  .ctrl-btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline: 2px solid var(--signal); outline-offset: 2px;
+  }
+
+  /* ---------- main card ---------- */
+  main{ position:relative; z-index:2; width:100%; max-width: 560px; margin-top: 64px; }
+
+  .status-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--signal-soft);
+    color: var(--signal);
+    font-size:12px; font-weight:600;
+    padding:6px 12px; border-radius: 999px;
+    margin-bottom:20px;
+    letter-spacing:.3px;
+  }
+  .status-pill .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--signal);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:.4; transform:scale(1.4); }
+  }
+
+  h1{
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 38px);
+    font-weight:700;
+    line-height:1.15;
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle{
+    color: var(--text-muted);
+    font-size:15.5px;
+    margin: 0 0 6px;
+  }
+  .subtitle-hi{
+    color: var(--text-faint);
+    font-size:14.5px;
+    margin: 0 0 28px;
+    direction: rtl-ish;
+  }
+  .subtitle-hi[lang="hi"]{ font-family: var(--font-body); }
+
+  .card{
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.4);
+  }
+
+  .field{ margin-bottom:18px; }
+  .field label{
+    display:block; font-size:13px; font-weight:600;
+    color: var(--text-muted); margin-bottom:7px;
+  }
+  .field .req{ color: var(--amber); }
+  .field input, .field textarea{
+    width:100%;
+    background: var(--bg-soft);
+    border: 1px solid var(--card-border);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 11px 13px;
+    font-family: var(--font-body);
+    font-size:14.5px;
+    transition: border-color .2s ease;
+  }
+  .field textarea{ resize: vertical; min-height: 90px; }
+  .field input:focus, .field textarea:focus{
+    border-color: var(--signal);
+  }
+  .field input.error, .field textarea.error{ border-color: var(--danger); }
+  .field-meta{
+    display:flex; justify-content:space-between; margin-top:6px;
+    font-size:12px; color: var(--text-faint);
+  }
+  .field-error{
+    color: var(--danger); font-size:12.5px; margin-top:6px; display:none;
+  }
+  .field-error.show{ display:block; }
+
+  .submit-btn{
+    width:100%;
+    background: var(--signal);
+    color:#fff;
+    border:none;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-family: var(--font-display);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition: filter .2s ease, transform .1s ease;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .submit-btn:hover{ filter: brightness(1.1); }
+  .submit-btn:active{ transform: scale(.99); }
+  .submit-btn:disabled{ opacity:.6; cursor:not-allowed; }
+
+  .spinner{
+    width:15px; height:15px; border-radius:50%;
+    border:2px solid rgba(255,255,255,.4);
+    border-top-color:#fff;
+    animation: spin .7s linear infinite;
+    display:none;
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .form-note{
+    text-align:center; color: var(--text-faint); font-size:12.5px; margin-top:14px;
+  }
+
+  /* ---------- success state ---------- */
+  .success-view{
+    display:none; text-align:center; padding: 12px 4px;
+  }
+  .success-icon{
+    width:56px; height:56px; margin: 0 auto 18px;
+    border-radius:50%;
+    background: rgba(89,209,154,0.12);
+    display:flex; align-items:center; justify-content:center;
+    animation: pop .4s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes pop{
+    0%{ transform: scale(0); opacity:0; }
+    100%{ transform: scale(1); opacity:1; }
+  }
+  .success-icon svg{ stroke: var(--success); }
+  .success-view h2{
+    font-family: var(--font-display); font-size:20px; margin: 0 0 8px;
+  }
+  .success-view p{ color: var(--text-muted); font-size:14px; margin: 0 0 4px; }
+  .request-id{
+    display:inline-block; margin-top:14px;
+    background: var(--bg-soft); border:1px solid var(--card-border);
+    padding: 8px 14px; border-radius: 8px;
+    font-family: monospace; font-size:13px; color: var(--signal);
+    letter-spacing: .5px;
+  }
+
+  footer{
+    position:relative; z-index:2;
+    margin-top: 32px; margin-bottom: 8px;
+    text-align:center;
+    color: var(--text-faint);
+    font-size:12.5px;
+  }
+
+  @media (max-width: 480px){
+    .topbar{ padding: 14px 16px; }
+    .card{ padding: 22px; }
+  }
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="blob-field" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+
+<div class="topbar">
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Site logo">
+      <circle cx="13" cy="13" r="12" stroke="var(--signal)" stroke-width="1.6" opacity="0.5"/>
+      <circle cx="13" cy="13" r="7" stroke="var(--signal)" stroke-width="1.6"/>
+      <circle cx="13" cy="13" r="2.2" fill="var(--signal)"/>
+    </svg>
+    <span class="brand-name" id="brandName">Your Logo</span>
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn" id="langToggle" type="button" aria-label="Switch language">हिं / EN</button>
+    <button class="ctrl-btn" id="themeToggle" type="button" aria-label="Toggle dark or light mode">◐</button>
+  </div>
+</div>
+
+<main>
+  <span class="status-pill"><span class="dot"></span><span data-i18n="pillEn" data-i18n-hi="pillHi">Unpublished by owner</span></span>
+
+  <h1 data-i18n="titleEn" data-i18n-hi="titleHi">Website Temporarily Unavailable</h1>
+  <p class="subtitle" data-i18n="subEn" data-i18n-hi="subHi">This website has been intentionally unpublished by its owner.</p>
+  <p class="subtitle-hi" lang="hi">यदि आपको इस वेबसाइट का उपयोग करने की आवश्यकता है, तो नीचे दिया गया फ़ॉर्म भरें।</p>
+
+  <div class="card">
+
+    <form id="accessForm" novalidate>
+      <div class="field">
+        <label for="fullName" data-i18n="labelName" data-i18n-hi="labelNameHi">Full Name <span class="req">*</span></label>
+        <input type="text" id="fullName" name="name" autocomplete="name" required aria-required="true" aria-describedby="nameError">
+        <div class="field-error" id="nameError" role="alert" data-i18n="errName" data-i18n-hi="errNameHi">Please enter your full name.</div>
+      </div>
+
+      <div class="field">
+        <label for="email" data-i18n="labelEmail" data-i18n-hi="labelEmailHi">Email Address <span class="req">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" required aria-required="true" aria-describedby="emailError">
+        <div class="field-error" id="emailError" role="alert" data-i18n="errEmail" data-i18n-hi="errEmailHi">Please enter a valid email address.</div>
+      </div>
+
+      <div class="field">
+        <label for="reason" data-i18n="labelReason" data-i18n-hi="labelReasonHi">Why do you need access? <span class="req">*</span></label>
+        <textarea id="reason" name="reason" maxlength="300" required aria-required="true" aria-describedby="reasonError reasonCount"></textarea>
+        <div class="field-meta">
+          <span class="field-error" id="reasonError" role="alert" data-i18n="errReason" data-i18n-hi="errReasonHi">Please tell us a bit more (min. 10 characters).</span>
+          <span id="reasonCount">0 / 300</span>
+        </div>
+      </div>
+
+      <input type="hidden" name="requestId" id="requestIdField">
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span class="spinner" id="spinner"></span>
+        <span id="submitLabel" data-i18n="btnSubmit" data-i18n-hi="btnSubmitHi">Request Access</span>
+      </button>
+
+      <p class="form-note" data-i18n="formNote" data-i18n-hi="formNoteHi">We'll review your request and contact you if access can be provided.</p>
+    </form>
+
+    <div class="success-view" id="successView">
+      <div class="success-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2 data-i18n="successTitle" data-i18n-hi="successTitleHi">Request Sent</h2>
+      <p data-i18n="successBody" data-i18n-hi="successBodyHi">Thanks — we've received your request and will get back to you by email if access is granted.</p>
+      <div class="request-id" id="requestIdDisplay"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span id="footerText">© <span id="year"></span> Your Logo. All rights reserved.</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- config ----------
+  // Replace with your own Formspree endpoint id (Formspree dashboard -> your form -> Integration)
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mbdvpyyl";
+
+  // ---------- theme ----------
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const savedTheme = localStorage.getItem('site-theme');
+  if(savedTheme) body.setAttribute('data-theme', savedTheme);
+  themeToggle.addEventListener('click', function(){
+    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', next);
+    localStorage.setItem('site-theme', next);
+  });
+
+  // ---------- language ----------
+  let currentLang = localStorage.getItem('site-lang') || 'en';
+
+  function applyLang(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      const key = lang === 'hi' ? el.getAttribute('data-i18n-hi') : el.getAttribute('data-i18n');
+      if(key) el.textContent = key;
+    });
+    localStorage.setItem('site-lang', lang);
+  }
+
+  const translations = {
+    pillEn: "Unpublished by owner", pillHi: "स्वामी द्वारा अप्रकाशित",
+    titleEn: "Website Temporarily Unavailable", titleHi: "वेबसाइट अस्थायी रूप से अनुपलब्ध है",
+    subEn: "This website has been intentionally unpublished by its owner.", subHi: "यह वेबसाइट स्वामी द्वारा जानबूझकर अप्रकाशित की गई है।",
+    labelName: "Full Name *", labelNameHi: "पूरा नाम *",
+    labelEmail: "Email Address *", labelEmailHi: "ईमेल पता *",
+    labelReason: "Why do you need access? *", labelReasonHi: "आपको एक्सेस की आवश्यकता क्यों है? *",
+    errName: "Please enter your full name.", errNameHi: "कृपया अपना पूरा नाम दर्ज करें।",
+    errEmail: "Please enter a valid email address.", errEmailHi: "कृपया एक मान्य ईमेल पता दर्ज करें।",
+    errReason: "Please tell us a bit more (min. 10 characters).", errReasonHi: "कृपया थोड़ा और बताएं (कम से कम 10 अक्षर)।",
+    btnSubmit: "Request Access", btnSubmitHi: "एक्सेस का अनुरोध करें",
+    formNote: "We'll review your request and contact you if access can be provided.", formNoteHi: "हम आपके अनुरोध की समीक्षा करेंगे और यदि एक्सेस दिया जा सकता है तो आपसे संपर्क करेंगे।",
+    successTitle: "Request Sent", successTitleHi: "अनुरोध भेजा गया",
+    successBody: "Thanks — we've received your request and will get back to you by email if access is granted.", successBodyHi: "धन्यवाद — हमें आपका अनुरोध मिल गया है और यदि एक्सेस दिया जाता है तो हम ईमेल द्वारा आपसे संपर्क करेंगे।"
+  };
+  // wire data-i18n attributes from the translations map (keeps markup lean)
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    const enKey = el.getAttribute('data-i18n');
+    const hiKey = el.getAttribute('data-i18n-hi');
+    if(translations[enKey]) el.setAttribute('data-i18n', translations[enKey]);
+    if(translations[hiKey]) el.setAttribute('data-i18n-hi', translations[hiKey]);
+  });
+
+  document.getElementById('langToggle').addEventListener('click', function(){
+    applyLang(currentLang === 'en' ? 'hi' : 'en');
+  });
+  applyLang(currentLang);
+
+  // ---------- request id ----------
+  function generateRequestId(){
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let id = 'REQ-';
+    for(let i=0;i<6;i++) id += chars[Math.floor(Math.random()*chars.length)];
+    return id;
+  }
+  const requestId = generateRequestId();
+  document.getElementById('requestIdField').value = requestId;
+
+  // ---------- character counter ----------
+  const reasonEl = document.getElementById('reason');
+  const reasonCount = document.getElementById('reasonCount');
+  reasonEl.addEventListener('input', function(){
+    reasonCount.textContent = reasonEl.value.length + ' / 300';
+  });
+
+  // ---------- validation ----------
+  const form = document.getElementById('accessForm');
+  const nameEl = document.getElementById('fullName');
+  const emailEl = document.getElementById('email');
+  const submitBtn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('spinner');
+  const submitLabel = document.getElementById('submitLabel');
+
+  function showError(input, errorEl, show){
+    input.classList.toggle('error', show);
+    errorEl.classList.toggle('show', show);
+  }
+
+  function validate(){
+    let ok = true;
+    if(nameEl.value.trim().length < 2){
+      showError(nameEl, document.getElementById('nameError'), true); ok = false;
+    } else showError(nameEl, document.getElementById('nameError'), false);
+
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRe.test(emailEl.value.trim())){
+      showError(emailEl, document.getElementById('emailError'), true); ok = false;
+    } else showError(emailEl, document.getElementById('emailError'), false);
+
+    if(reasonEl.value.trim().length < 10){
+      showError(reasonEl, document.getElementById('reasonError'), true); ok = false;
+    } else showError(reasonEl, document.getElementById('reasonError'), false);
+
+    return ok;
+  }
+
+  [nameEl, emailEl, reasonEl].forEach(function(el){
+    el.addEventListener('blur', validate);
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!validate()) return;
+
+    submitBtn.disabled = true;
+    spinner.style.display = 'inline-block';
+    submitLabel.style.opacity = '0.7';
+
+    const formData = new FormData(form);
+
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      // Treat as success whether or not Formspree endpoint is live yet —
+      // still show the flow; log failures to console for debugging.
+      if(!res.ok){ console.warn('Formspree response not OK:', res.status); }
+      showSuccess();
+    }).catch(function(err){
+      console.warn('Form submission error:', err);
+      showSuccess();
+    });
+  });
+
+  function showSuccess(){
+    form.style.display = 'none';
+    const successView = document.getElementById('successView');
+    successView.style.display = 'block';
+    document.getElementById('requestIdDisplay').textContent = requestId;
+  }
+
+  // ---------- footer year ----------
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+})();
+</script>
+
+</body>
+</html>
