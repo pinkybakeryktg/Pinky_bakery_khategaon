@@ -124,6 +124,10 @@
   .brand-name{
     font-family: var(--font-display); font-weight:600; font-size:15px;
     color: var(--text); letter-spacing:.2px;
+    display:inline-flex; align-items:center;
+  }
+  .brand-name img{
+    height:26px; width:auto; display:block; border-radius:6px;
   }
   .controls{ display:flex; gap:8px; }
   .ctrl-btn{
@@ -307,12 +311,7 @@
 
 <div class="topbar">
   <div class="brand">
-    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Site logo">
-      <circle cx="13" cy="13" r="12" stroke="var(--signal)" stroke-width="1.6" opacity="0.5"/>
-      <circle cx="13" cy="13" r="7" stroke="var(--signal)" stroke-width="1.6"/>
-      <circle cx="13" cy="13" r="2.2" fill="var(--signal)"/>
-    </svg>
-    <span class="brand-name" id="brandName">Your Logo</span>
+    <span class="brand-name" id="brandName"> <img src="favicon.png" alt="logo"> </span>
   </div>
   <div class="controls">
     <button class="ctrl-btn" id="langToggle" type="button" aria-label="Switch language">हिं / EN</button>
