@@ -161,6 +161,34 @@ iframe { border: none; width: 100%; display: block; }
   transform: translateY(-2px);
   box-shadow: 0 10px 36px rgba(255,79,135,0.45);
 }
+.menu-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 0;
+    border-bottom:1px dashed rgba(255,255,255,.15);
+    font-size:15px;
+}
+
+.menu-item:last-child{
+    border-bottom:none;
+}
+
+.menu-item span:last-child{
+    font-weight:700;
+    color:#ffb347;
+}
+
+.menu-card h2{
+    margin-bottom:20px;
+    color:#ff6b9d;
+}
+
+.menu-card hr{
+    border:none;
+    border-top:1px solid rgba(255,255,255,.15);
+    margin:18px 0;
+}
 
 .btn-outline {
   background: transparent;
