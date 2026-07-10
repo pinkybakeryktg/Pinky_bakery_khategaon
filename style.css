@@ -161,72 +161,136 @@ iframe { border: none; width: 100%; display: block; }
   transform: translateY(-2px);
   box-shadow: 0 10px 36px rgba(255,79,135,0.45);
 }
-/* Menu Card Container/Box */
+/* ============================================================
+   ── 9. Menu Sections (Optimized & Integrated) ────────────────
+   ============================================================ */
+
+.menu {
+  background: var(--cream); /* Matches base background theme */
+}
+
+/* Category Tabs List Container */
+.menu-tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+
+/* Category Tab Buttons */
+.tab-btn {
+  padding: 9px 22px;
+  border-radius: var(--r-xl); /* Custom 40px rounded system */
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 500;
+  background: var(--white);
+  color: var(--text-mid);
+  border: 1.5px solid var(--border);
+  transition: all 0.25s var(--ease);
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
+/* Active Category Button State */
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--pink) 0%, var(--rose) 100%);
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(255, 79, 135, 0.3);
+}
+
+/* Responsive Menu Layout Engine */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 26px;
+  align-items: start; /* Critical fix: Prevents uneven list heights from stretching cards */
+}
+
+/* Menu Item Category Card Box */
 .menu-card {
-    background-color: #1a1a1a; /* Replace with your background color */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    
-    /* CRITICAL FIX: Stops the box from stretching vertically if using Grid/Flex on the parent */
-    align-self: start; 
-    height: fit-content; 
-    display: inline-block; /* Essential if using column-count layout */
-    width: 100%;
+  background: var(--white);
+  border-radius: var(--r-md); /* Consistent 18px radius system */
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  transition: all 0.35s var(--ease);
+  height: fit-content;
 }
 
-/* Menu Card Title */
+/* Dynamic Hidden Filter Switch for Javascript toggles */
+.menu-card.hidden {
+  display: none;
+}
+
+/* Subtle card float behavior on desktop hover */
+.menu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Menu Card Title Header */
 .menu-card h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 22px;
-    color: #ff6b9d;
-    letter-spacing: 0.5px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--brown); /* Harmonious dark-brown title color */
+  letter-spacing: 0.3px;
+  border-bottom: 2px solid var(--pink-soft);
+  padding-bottom: 10px;
 }
 
-/* Menu Item Container */
+/* Menu Item Row Wrapper */
 .menu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 6px;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
-    font-size: 15px;
-    color: #ffffff;
-    transition: background-color 0.25s ease, padding 0.25s ease;
-    border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 6px;
+  border-bottom: 1px dashed rgba(196, 119, 46, 0.15); /* Clean border matched to brand tint */
+  font-size: 0.92rem;
+  color: var(--text-dark); /* Crisp readable contrast over cream/white cards */
+  transition: background-color 0.25s var(--ease), padding 0.25s var(--ease);
+  border-radius: var(--r-sm);
 }
 
-/* Hover feedback */
+/* Hover feedback trace */
 .menu-item:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-    padding-left: 10px;
-    padding-right: 10px;
+  background-color: var(--pink-soft); /* Warm cream pink hover highlight */
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.menu-item:last-child {
-    border-bottom: none;
+/* Removes double borders at the base of card components */
+.menu-item:last-child,
+.menu-item:has(+ hr) {
+  border-bottom: none;
 }
 
-/* Price Styling */
+/* Price Badge Styling (e.g., ₹120) */
 .menu-item span:last-child {
-    font-weight: 700;
-    color: #ffb347;
-    background: rgba(255, 179, 71, 0.1);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-    white-space: nowrap; /* Prevents price text from breaking into two lines */
+  font-weight: 600;
+  color: var(--rose); /* Bright contrast color for readability */
+  background: var(--pink-soft);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  white-space: nowrap; /* Prevents currency symbols from detaching on micro viewports */
 }
 
-/* Section Divider inside Cards */
+/* Section Dividers inside complex item layouts (like Samosa & Fries) */
 .menu-card hr {
-    border: none;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 80%, transparent);
-    margin: 20px 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  margin: 18px 0;
 }
 .btn-outline {
   background: transparent;
