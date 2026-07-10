@@ -205,23 +205,39 @@ iframe { border: none; width: 100%; display: block; }
   box-shadow: 0 4px 16px rgba(255, 79, 135, 0.3);
 }
 
-/* Responsive Menu Layout Engine */
 .menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 26px;
-  align-items: start; /* Critical fix: Prevents uneven list heights from stretching cards */
+  /* Dynamic columns: 3 on desktop, 2 on tablet, 1 on mobile */
+  column-count: 3;
+  column-gap: 26px;
+  width: 100%;
 }
 
-/* Menu Item Category Card Box */
 .menu-card {
   background: var(--white);
-  border-radius: var(--r-md); /* Consistent 18px radius system */
+  border-radius: var(--r-md);
   padding: 24px;
   box-shadow: var(--shadow-sm);
   border: 1px solid rgba(255, 255, 255, 0.9);
-  transition: all 0.35s var(--ease);
+  margin-bottom: 26px; /* Essential: creates spacing between cards vertically */
+  
+  /* CRITICAL FIXES FOR COLUMN LAYOUT */
+  display: inline-block; /* Prevents card from breaking across two columns */
+  width: 100%;           /* Ensures it takes full column width */
   height: fit-content;
+  
+  transition: all 0.35s var(--ease);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .menu-grid {
+    column-count: 2;
+  }
+}
+@media (max-width: 600px) {
+  .menu-grid {
+    column-count: 1;
+  }
 }
 
 /* Dynamic Hidden Filter Switch for Javascript toggles */
