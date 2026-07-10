@@ -161,35 +161,73 @@ iframe { border: none; width: 100%; display: block; }
   transform: translateY(-2px);
   box-shadow: 0 10px 36px rgba(255,79,135,0.45);
 }
-.menu-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 0;
-    border-bottom:1px dashed rgba(255,255,255,.15);
-    font-size:15px;
+/* Menu Card Container/Box */
+.menu-card {
+    background-color: #1a1a1a; /* Replace with your background color */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    
+    /* CRITICAL FIX: Stops the box from stretching vertically if using Grid/Flex on the parent */
+    align-self: start; 
+    height: fit-content; 
+    display: inline-block; /* Essential if using column-count layout */
+    width: 100%;
 }
 
-.menu-item:last-child{
-    border-bottom:none;
+/* Menu Card Title */
+.menu-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 22px;
+    color: #ff6b9d;
+    letter-spacing: 0.5px;
 }
 
-.menu-item span:last-child{
-    font-weight:700;
-    color:#ffb347;
+/* Menu Item Container */
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 6px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+    font-size: 15px;
+    color: #ffffff;
+    transition: background-color 0.25s ease, padding 0.25s ease;
+    border-radius: 4px;
 }
 
-.menu-card h2{
-    margin-bottom:20px;
-    color:#ff6b9d;
+/* Hover feedback */
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.menu-card hr{
-    border:none;
-    border-top:1px solid rgba(255,255,255,.15);
-    margin:18px 0;
+.menu-item:last-child {
+    border-bottom: none;
 }
 
+/* Price Styling */
+.menu-item span:last-child {
+    font-weight: 700;
+    color: #ffb347;
+    background: rgba(255, 179, 71, 0.1);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Prevents price text from breaking into two lines */
+}
+
+/* Section Divider inside Cards */
+.menu-card hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 80%, transparent);
+    margin: 20px 0;
+}
 .btn-outline {
   background: transparent;
   color: var(--pink);
