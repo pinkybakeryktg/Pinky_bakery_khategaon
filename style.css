@@ -177,11 +177,12 @@ iframe { border: none; width: 100%; display: block; }
 }
 
 /* Menu Card Title */
+/* Menu Card Title */
 .menu-card h2 {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 22px;
-    color: #ff6b9d;
+    color: #ffb347; /* Price ke jaisa gold/orange colour */
     letter-spacing: 0.5px;
 }
 
