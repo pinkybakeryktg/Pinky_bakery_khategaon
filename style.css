@@ -161,9 +161,9 @@ iframe { border: none; width: 100%; display: block; }
   transform: translateY(-2px);
   box-shadow: 0 10px 36px rgba(255,79,135,0.45);
 }
-/* ── 9. New Menu Image Layout ─────────────────────────────── */
+/* ── Clean Menu Image Layout ─────────────────────────────── */
 .menu-container {
-    max-width: 1000px; /* Desktop par perfect readability ke liye standard width */
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 16px;
     display: flex;
@@ -174,26 +174,26 @@ iframe { border: none; width: 100%; display: block; }
 .menu-image-wrap {
     width: 100%;
     max-width: 100%;
-    aspect-ratio: 1170 / 780; /* Image ka aspect ratio maintain rakhega */
-    border-radius: var(--r-md); /* Premium rounded corners, source file ke style system se */
+    aspect-ratio: 1170 / 780;
+    border-radius: var(--r-md);
     overflow: hidden;
-    box-shadow: var(--shadow-md); /* Soft premium shadow effect[cite: 1] */
-    border: 1px solid rgba(196, 119, 46, 0.15); /* Subtly matches the brand border[cite: 1] */
-    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease); /* Smooth animations[cite: 1] */
-}
-
-/* Image responsive wrapper */
-.menu-image-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Responsive hone par image distortion se bachayega */
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(196, 119, 46, 0.15);
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    cursor: zoom-in; /* Cursor badlega taaki logo ko pata chale zoom ho sakta hai */
     display: block;
 }
 
-/* Hover dynamic effect */
+.menu-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .menu-image-wrap:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-lg); /* Slightly deeper shadow on hover[cite: 1] */
+    box-shadow: var(--shadow-lg);
 }
 .btn-outline {
   background: transparent;
