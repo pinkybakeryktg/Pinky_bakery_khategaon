@@ -162,48 +162,59 @@ iframe { border: none; width: 100%; display: block; }
   box-shadow: 0 10px 36px rgba(255,79,135,0.45);
 }
 /* Menu Card Container/Box */
+/* Menu Card Container/Box */
 .menu-card {
-    background-color: #1a1a1a; /* Replace with your background color */
+    background-color: #1a1a1a; 
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
+    border-radius: 16px; /* Thoda zyada modern aur smooth round corners */
+    padding: 24px;
     
-    /* CRITICAL FIX: Stops the box from stretching vertically if using Grid/Flex on the parent */
-    align-self: start; 
-    height: fit-content; 
-    display: inline-block; /* Essential if using column-count layout */
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Apne row ke hisab se full height lega */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Hover par premium feedback */
+.menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 179, 71, 0.15); /* Price waale gold colour ka subtle glow */
+    border-color: rgba(255, 179, 71, 0.3);
+}
+
+/* Menu Card Title */
 /* Menu Card Title */
 /* Menu Card Title */
 .menu-card h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 22px;
-    color: #ffb347; /* Price ke jaisa gold/orange colour */
+    margin-bottom: 20px;
+    color: #ffb347; /* Aapke price ka gold colour */
     letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid rgba(255, 179, 71, 0.2);
+    padding-bottom: 10px;
 }
 
 /* Menu Item Container */
+/* Menu Items wrapper wrapper agar HTML me ho, nahi toh direct items automatically adjust honge */
 .menu-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 6px;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+    padding: 14px 8px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
     font-size: 15px;
     color: #ffffff;
     transition: background-color 0.25s ease, padding 0.25s ease;
-    border-radius: 4px;
 }
 
-/* Hover feedback */
 .menu-item:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-    padding-left: 10px;
-    padding-right: 10px;
+    background-color: rgba(255, 179, 71, 0.05); /* Soft gold tint on hover */
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 8px;
 }
 
 .menu-item:last-child {
