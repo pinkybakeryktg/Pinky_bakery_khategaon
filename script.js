@@ -6,36 +6,51 @@
 'use strict';
 
 /* ──────────────────────────────────────────────────────────
-   1. Navbar: Scroll shrink + Active link + Hamburger
+   1. Navbar & Back To Top Setup
    ────────────────────────────────────────────────────────── */
 const navbar     = document.getElementById('navbar');
 const hamburger  = document.getElementById('hamburger');
 const navLinks   = document.getElementById('navLinks');
-const allLinks   = navLinks.querySelectorAll('.nav-link');
+const allLinks   = navLinks ? navLinks.querySelectorAll('.nav-link') : [];
+const backToTop  = document.getElementById('backToTop'); // ID matches HTML element
 
-// Shrink navbar on scroll
+function toggleBackToTop() {
+  if (backToTop) {
+    backToTop.hidden = window.scrollY < 400;
+  }
+}
+
+// Shrink navbar & toggle Back To Top on scroll
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
+  if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 60);
   toggleBackToTop();
 }, { passive: true });
 
-// Hamburger toggle
-hamburger.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('open');
-  hamburger.classList.toggle('open', isOpen);
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
+if (backToTop) {
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
-// Close mobile nav on link click
-navLinks.addEventListener('click', (e) => {
-  if (e.target.classList.contains('nav-link')) {
-    navLinks.classList.remove('open');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-});
+// Hamburger toggle
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close mobile nav on link click
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.classList.contains('nav-link')) {
+      navLinks.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+}
 
 // Active nav link on scroll
 const sections = document.querySelectorAll('section[id], .hero');
@@ -69,6 +84,7 @@ let isDeleting  = false;
 let typingTimer;
 
 function typeLoop() {
+  if (!typingEl) return;
   const current = phrases[phraseIndex];
 
   if (!isDeleting) {
@@ -93,8 +109,7 @@ function typeLoop() {
   typingTimer = setTimeout(typeLoop, delay);
 }
 
-// Start after a short delay so the page settles
-setTimeout(typeLoop, 600);
+if (typingEl) setTimeout(typeLoop, 600);
 
 
 /* ──────────────────────────────────────────────────────────
@@ -160,7 +175,6 @@ tabBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const cat = btn.dataset.cat;
 
-    // Update active tab
     tabBtns.forEach(b => {
       b.classList.remove('active');
       b.setAttribute('aria-selected', 'false');
@@ -168,13 +182,11 @@ tabBtns.forEach(btn => {
     btn.classList.add('active');
     btn.setAttribute('aria-selected', 'true');
 
-    // Filter cards
     menuCards.forEach(card => {
       const match = cat === 'all' || card.dataset.cat === cat;
       card.classList.toggle('hidden', !match);
 
       if (match) {
-        // Re-trigger reveal for visible cards
         card.classList.remove('revealed');
         requestAnimationFrame(() => {
           setTimeout(() => card.classList.add('revealed'), 20);
@@ -184,7 +196,6 @@ tabBtns.forEach(btn => {
   });
 });
 
-// Initially reveal all visible cards
 menuCards.forEach(card => card.classList.add('revealed'));
 
 
@@ -198,7 +209,6 @@ const lightboxClose = document.getElementById('lightboxClose');
 const lightboxPrev = document.getElementById('lightboxPrev');
 const lightboxNext = document.getElementById('lightboxNext');
 
-// Map each gallery image class to its computed background for lightbox
 const galleryBgs = [
   'linear-gradient(135deg, #ff9ab5, #ff4f87, #c4294e)',
   'linear-gradient(135deg, #ffe8a3, #f5c842, #e8a820)',
@@ -210,7 +220,6 @@ const galleryBgs = [
   'linear-gradient(135deg, #c8a868, #7a5010, #3a2005)'
 ];
 
-// Decorative labels for lightbox
 const galleryLabels = [
   '🎂 Celebration Cakes',
   '🍰 Layered Pastries',
@@ -225,21 +234,24 @@ const galleryLabels = [
 let currentLbIdx = 0;
 
 function openLightbox(idx) {
+  if (!lightbox || !lightboxImg) return;
   currentLbIdx = idx;
   lightboxImg.style.background = galleryBgs[idx];
   lightboxImg.setAttribute('aria-label', galleryLabels[idx]);
   lightbox.hidden = false;
   document.body.style.overflow = 'hidden';
-  lightboxClose.focus();
+  if (lightboxClose) lightboxClose.focus();
 }
 
 function closeLightbox() {
+  if (!lightbox) return;
   lightbox.hidden = true;
   document.body.style.overflow = '';
-  galleryItems[currentLbIdx].focus();
+  if (galleryItems[currentLbIdx]) galleryItems[currentLbIdx].focus();
 }
 
 function showLbImage(idx) {
+  if (!lightboxImg) return;
   currentLbIdx = (idx + galleryBgs.length) % galleryBgs.length;
   lightboxImg.style.animation = 'none';
   requestAnimationFrame(() => {
@@ -255,16 +267,18 @@ galleryItems.forEach((item, i) => {
   });
 });
 
-lightboxClose.addEventListener('click', closeLightbox);
-lightboxPrev.addEventListener('click', () => showLbImage(currentLbIdx - 1));
-lightboxNext.addEventListener('click', () => showLbImage(currentLbIdx + 1));
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightboxPrev) lightboxPrev.addEventListener('click', () => showLbImage(currentLbIdx - 1));
+if (lightboxNext) lightboxNext.addEventListener('click', () => showLbImage(currentLbIdx + 1));
 
-lightbox.addEventListener('click', e => {
-  if (e.target === lightbox) closeLightbox();
-});
+if (lightbox) {
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+}
 
 document.addEventListener('keydown', e => {
-  if (lightbox.hidden) return;
+  if (!lightbox || lightbox.hidden) return;
   if (e.key === 'Escape')     closeLightbox();
   if (e.key === 'ArrowLeft')  showLbImage(currentLbIdx - 1);
   if (e.key === 'ArrowRight') showLbImage(currentLbIdx + 1);
@@ -276,11 +290,11 @@ document.addEventListener('keydown', e => {
    ────────────────────────────────────────────────────────── */
 const track    = document.getElementById('testimonialsTrack');
 const dotsWrap = document.getElementById('testiDots');
-const cards    = track.querySelectorAll('.testimonial-card');
+const cards    = track ? track.querySelectorAll('.testimonial-card') : [];
 
 let currentSlide = 0;
 let slidesPerView = getSlidesPerView();
-let totalSlides   = Math.ceil(cards.length / slidesPerView);
+let totalSlides   = cards.length ? Math.ceil(cards.length / slidesPerView) : 0;
 let autoplayTimer;
 
 function getSlidesPerView() {
@@ -288,6 +302,7 @@ function getSlidesPerView() {
 }
 
 function buildDots() {
+  if (!dotsWrap) return;
   dotsWrap.innerHTML = '';
   for (let i = 0; i < totalSlides; i++) {
     const dot = document.createElement('button');
@@ -300,14 +315,16 @@ function buildDots() {
 }
 
 function updateDots() {
+  if (!dotsWrap) return;
   dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => {
     d.classList.toggle('active', i === currentSlide);
   });
 }
 
 function goToSlide(idx) {
+  if (!track || !cards.length) return;
   currentSlide = (idx + totalSlides) % totalSlides;
-  const cardWidth = cards[0].offsetWidth + 24; // gap
+  const cardWidth = cards[0].offsetWidth + 24;
   track.style.transform = `translateX(-${currentSlide * slidesPerView * cardWidth}px)`;
   updateDots();
   resetAutoplay();
@@ -319,18 +336,21 @@ function nextSlide() {
 
 function resetAutoplay() {
   clearInterval(autoplayTimer);
-  autoplayTimer = setInterval(nextSlide, 5000);
+  if (cards.length) autoplayTimer = setInterval(nextSlide, 5000);
 }
 
 // Touch / swipe support
-let touchStartX = 0;
-track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-track.addEventListener('touchend', e => {
-  const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
-});
+if (track) {
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
+  });
+}
 
 window.addEventListener('resize', () => {
+  if (!cards.length) return;
   slidesPerView = getSlidesPerView();
   totalSlides   = Math.ceil(cards.length / slidesPerView);
   currentSlide  = 0;
@@ -338,8 +358,10 @@ window.addEventListener('resize', () => {
   goToSlide(0);
 }, { passive: true });
 
-buildDots();
-resetAutoplay();
+if (cards.length) {
+  buildDots();
+  resetAutoplay();
+}
 
 
 /* ──────────────────────────────────────────────────────────
@@ -368,21 +390,7 @@ document.querySelectorAll('.ripple-btn').forEach(btn => {
 
 
 /* ──────────────────────────────────────────────────────────
-   9. Back To Top Button
-   ────────────────────────────────────────────────────────── */
-const backToTop = document.getElementById('backToTop');
-
-function toggleBackToTop() {
-  backToTop.hidden = window.scrollY < 400;
-}
-
-backToTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-
-/* ──────────────────────────────────────────────────────────
-   10. Smooth Scroll (polyfill for anchor links)
+   9. Smooth Scroll (polyfill for anchor links)
    ────────────────────────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', function (e) {
@@ -390,7 +398,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     const el  = document.getElementById(id);
     if (!el) return;
     e.preventDefault();
-    const offset = navbar.offsetHeight + 8;
+    const offset = navbar ? navbar.offsetHeight + 8 : 8;
     const top    = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
   });
@@ -398,7 +406,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 
 /* ──────────────────────────────────────────────────────────
-   11. Parallax Floating Decorations (subtle mouse move)
+   10. Parallax Floating Decorations
    ────────────────────────────────────────────────────────── */
 const decos = document.querySelectorAll('.hero-deco');
 
@@ -417,7 +425,7 @@ document.addEventListener('mousemove', e => {
 
 
 /* ──────────────────────────────────────────────────────────
-   12. Page Load — Initial Reveal & Stagger Hero
+   11. Page Load — Reveal & Mandatory Formspree Popup
    ────────────────────────────────────────────────────────── */
 window.addEventListener('DOMContentLoaded', () => {
   // Stagger hero children
@@ -425,4 +433,59 @@ window.addEventListener('DOMContentLoaded', () => {
   heroRevealEls.forEach((el, i) => {
     setTimeout(() => el.classList.add('revealed'), 300 + i * 180);
   });
+
+  // --- Mandatory Formspree Popup Logic ---
+  const popupOverlay     = document.getElementById("mandatory-popup");
+  const mandatoryForm    = document.getElementById("mandatory-form");
+  const visitorNameInput = document.getElementById("visitor-name");
+  const submitBtn        = document.getElementById("submit-btn");
+
+  if (popupOverlay && mandatoryForm) {
+    const hasVisitedBefore = localStorage.getItem("portfolio_visitor_name");
+
+    if (!hasVisitedBefore) {
+      popupOverlay.style.display = "flex";
+    }
+
+    mandatoryForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nameVal = visitorNameInput ? visitorNameInput.value.trim() : "";
+      if (!nameVal) return;
+
+      if (submitBtn) {
+        submitBtn.textContent = "Submitting...";
+        submitBtn.disabled = true;
+      }
+
+      const formData = new FormData(mandatoryForm);
+
+      try {
+        const response = await fetch(mandatoryForm.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          localStorage.setItem("portfolio_visitor_name", nameVal);
+          popupOverlay.style.display = "none";
+        } else {
+          alert("Something went wrong. Please try again.");
+          if (submitBtn) {
+            submitBtn.textContent = "Submit";
+            submitBtn.disabled = false;
+          }
+        }
+      } catch (error) {
+        alert("Network error. Please check your connection.");
+        if (submitBtn) {
+          submitBtn.textContent = "Submit";
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  }
 });
