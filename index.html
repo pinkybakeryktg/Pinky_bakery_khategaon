@@ -58,7 +58,19 @@
       </button>
     </div>
   </nav>
-
+<!-- Mandatory One-Time Popup with Formspree -->
+<div id="mandatory-popup" class="popup-overlay" style="display: none;">
+    <div class="popup-box">
+        <h2>Welcome</h2>
+        <p>Please enter your name to continue.</p>
+        
+        <!-- Formspree endpoint yahan add karein -->
+        <form id="mandatory-form" action="https://formspree.io/f/mbdvpyyl" method="POST">
+            <input type="text" id="visitor-name" name="visitor_name" placeholder="Your Name" required autocomplete="off">
+            <button type="submit" id="submit-btn">Submit</button>
+        </form>
+    </div>
+</div>
   <!-- ===== HERO ===== -->
   <section class="hero" id="home" aria-label="Hero section">
     <!-- Floating decorations -->
@@ -418,6 +430,7 @@
           <li><a href="#menu">Menu</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
+            <li><a href="feedback.html">Feedback us</a></li>
         </ul>
       </div>
 
